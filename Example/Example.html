@@ -1,0 +1,130 @@
+<html ng-app="BlocklyAngularExample">
+
+	<head>
+		<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.js">
+
+		</script>
+
+
+
+		<script>
+
+			angular
+			.module("BlocklyAngularExample", [])
+			.controller(
+				'BlocklyAngularExampleController',
+				function ($scope, $http) {
+
+				$scope.selectedRadioButton = 0;
+
+				$scope.selectedRadioButtonChanged = function () {
+					console.log("selectedRadioButtonChanged");
+
+					//reset the Blockly Div
+
+					const blocklyDivElement = document.getElementById("blocklyDiv");
+					blocklyDivElement.innerHTML = '';
+
+					var workspace = Blockly.inject('blocklyDiv', {
+							toolbox: Blockly.Xml.textToDom("<xml><category name='Logic' colour='210'></xml>")
+						});
+
+				}
+
+			});
+
+
+			</script>
+
+
+
+
+			<script src="../google/blockly/blockly_compressed.js">
+			</script>
+			<script src="../google/blockly/blocks_compressed.js">
+			</script>
+			<script src="../google/blockly/msg/js/en.js">
+			</script>
+		</head>
+
+		<body ng-controller="BlocklyAngularExampleController">
+			<h1>BlocklyAngularExample</h1>
+
+
+
+			<table border="1" cellspacing="0">
+				<thead>
+					<th>Description</th>
+					<th>Choose</th>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>Hide Blockly</td>
+						<td>
+							<input type="radio" name="radioButtons"
+							ng-value="0"
+							ng-model="selectedRadioButton"
+							ng-change="selectedRadioButtonChanged()"
+							 />
+						</td>
+					</tr>
+					<tr>
+						<td>Show Blockly 1</td>
+						<td>
+							<input type="radio" name="radioButtons"
+							ng-value="1"
+							ng-model="selectedRadioButton"
+							ng-change="selectedRadioButtonChanged()"
+							 />
+						</td>
+					</tr>
+					<tr>
+						<td>Show Blockly 2</td>
+						<td>
+							<input type="radio" name="radioButtons"
+							ng-value="2"
+							ng-model="selectedRadioButton"
+							ng-change="selectedRadioButtonChanged()"
+							 />
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+			<p>Selected radio button: {{selectedRadioButton}}</p>
+
+
+
+			<div ng-show="selectedRadioButton > 0">
+
+				<div id="blocklySection">
+
+
+					<table border="1" cellspacing="0">
+						<col width="0%"/>
+						<col width="100%"/>
+
+						<tbody>
+							<tr>
+
+								<td>
+							Blockly:
+								</td>
+
+								<td>
+									<div id="blocklyDiv" style="height: 500px; width: 100%;"/>
+								</tr>
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+
+			</body>
+		</html>
+		
